@@ -1,0 +1,9 @@
+{{ form_row(productListForm.idProductList) }}
+{{ form_row(productListForm.title) }}
+{{ form_row(productListForm.type) }}
+{% if aggregateForm.ownerType is defined %}
+    {{ form_row(aggregateForm.ownerType) }}
+{% endif %}
+{% if productListForm.fkMerchantRelationship is defined %}
+    {{ form_row(productListForm.fkMerchantRelationship) }}
+{% endif %}
