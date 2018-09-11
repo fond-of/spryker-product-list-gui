@@ -8,6 +8,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @method \FondOfSpryker\Zed\ProductListGui\Communication\ProductListGuiCommunicationFactory getFactory()
+ */
 trait ProductListGuiControllerTrait
 {
     /**
@@ -35,6 +38,30 @@ trait ProductListGuiControllerTrait
     }
 
     /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function availableCompanyTableAction(): JsonResponse
+    {
+        $availableCompanyTable = $this->getFactory()->createAvailableCompanyTable();
+
+        return $this->jsonResponse(
+            $availableCompanyTable->fetchData()
+        );
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function assignedCompanyTableAction(): JsonResponse
+    {
+        $assignedCompanyTable = $this->getFactory()->createAssignedCompanyTable();
+
+        return $this->jsonResponse(
+            $assignedCompanyTable->fetchData()
+        );
+    }
+
+    /**
      * @param \Symfony\Component\Form\FormInterface $productListAggregateForm
      *
      * @return array
@@ -49,6 +76,12 @@ trait ProductListGuiControllerTrait
         $availableCustomerTable = $this->getFactory()->createAvailableCustomerTable();
         $assignedCustomerTable = $this->getFactory()->createAssignedCustomerTable();
 
+        $assignedCompanyRelationTabs = $this->getFactory()->createAssignedCompanyRelationTabs();
+        $availableCompanyRelationTabs = $this->getFactory()->createAvailableCompanyRelationTabs();
+
+        $availableCompanyTable = $this->getFactory()->createAvailableCompanyTable();
+        $assignedCompanyTable = $this->getFactory()->createAssignedCompanyTable();
+
         return array_merge(
             $templateVariables,
             [
@@ -56,6 +89,10 @@ trait ProductListGuiControllerTrait
                 'assignedCustomerRelationTabs' => $assignedCustomerRelationTabs->createView(),
                 'availableCustomerTable' => $availableCustomerTable->render(),
                 'assignedCustomerTable' => $assignedCustomerTable->render(),
+                'availableCompanyRelationTabs' => $availableCompanyRelationTabs->createView(),
+                'assignedCompanyRelationTabs' => $assignedCompanyRelationTabs->createView(),
+                'availableCompanyTable' => $availableCompanyTable->render(),
+                'assignedCompanyTable' => $assignedCompanyTable->render(),
             ]
         );
     }
@@ -87,6 +124,10 @@ trait ProductListGuiControllerTrait
 
         $productListTransfer->setProductListCustomerRelation(
             $aggregateFormTransfer->getProductListCustomerRelation()
+        );
+
+        $productListTransfer->setProductListCompanyRelation(
+            $aggregateFormTransfer->getProductListCompanyRelation()
         );
 
         $productListTransfer->setProductListProductConcreteRelation(

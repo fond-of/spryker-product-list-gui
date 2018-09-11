@@ -224,6 +224,8 @@ $(document).ready(function() {
     var assignedProductsTable = new SelectTableAPI();
     var availableCustomersTable = new SelectTableAPI();
     var assignedCustomersTable = new SelectTableAPI();
+    var availableCompaniesTable = new SelectTableAPI();
+    var assignedCompaniesTable = new SelectTableAPI();
 
     availableProductsTable.init(
         '#availableProductConcreteTable',
@@ -255,5 +257,21 @@ $(document).ready(function() {
         '.assignedCustomerTable-all-customers-checkbox',
         'a[href="#tab-content-deassignment_customer"]',
         '#productListAggregate_customerIdsToBeDeAssigned'
+    );
+
+    availableCompaniesTable.init(
+        '#availableCompanyTable',
+        '#companiesToBeAssigned',
+        '.availableCompanyTable-all-companies-checkbox',
+        'a[href="#tab-content-assignment_company"]',
+        '#productListAggregate_companyIdsToBeAssigned'
+    );
+
+    assignedCompaniesTable.init(
+        '#assignedCompanyTable',
+        '#companiesToBeDeassigned',
+        '.assignedCompanyTable-all-companies-checkbox',
+        'a[href="#tab-content-deassignment_company"]',
+        '#productListAggregate_companyIdsToBeDeAssigned'
     );
 });

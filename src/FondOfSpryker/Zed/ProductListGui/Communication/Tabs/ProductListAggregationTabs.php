@@ -12,6 +12,10 @@ class ProductListAggregationTabs extends BaseProductListAggregationTabs
     const CUSTOMERS_TAB_TITLE = 'Assign Customers';
     const CUSTOMERS_TAB_TEMPLATE = '@ProductListGui/_partials/_tabs/product-list-customer-relation.twig';
 
+    const COMPANIES_TAB_NAME = 'product_list_company_relation';
+    const COMPANIES_TAB_TITLE = 'Assign Companies';
+    const COMPANIES_TAB_TEMPLATE = '@ProductListGui/_partials/_tabs/product-list-company-relation.twig';
+
     /**
      * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
      *
@@ -22,6 +26,7 @@ class ProductListAggregationTabs extends BaseProductListAggregationTabs
         $tabsViewTransfer = parent::build($tabsViewTransfer);
 
         $this->addProductListCustomerRelationTab($tabsViewTransfer);
+        $this->addProductListCompanyRelationTab($tabsViewTransfer);
 
         return $tabsViewTransfer;
     }
@@ -38,6 +43,24 @@ class ProductListAggregationTabs extends BaseProductListAggregationTabs
             ->setName(static::CUSTOMERS_TAB_NAME)
             ->setTitle(static::CUSTOMERS_TAB_TITLE)
             ->setTemplate(static::CUSTOMERS_TAB_TEMPLATE);
+
+        $tabsViewTransfer->addTab($tabItemTransfer);
+
+        return $this;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
+     *
+     * @return $this
+     */
+    protected function addProductListCompanyRelationTab(TabsViewTransfer $tabsViewTransfer): self
+    {
+        $tabItemTransfer = new TabItemTransfer();
+        $tabItemTransfer
+            ->setName(static::COMPANIES_TAB_NAME)
+            ->setTitle(static::COMPANIES_TAB_TITLE)
+            ->setTemplate(static::COMPANIES_TAB_TEMPLATE);
 
         $tabsViewTransfer->addTab($tabItemTransfer);
 

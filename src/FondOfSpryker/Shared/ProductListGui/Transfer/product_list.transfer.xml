@@ -9,6 +9,10 @@
         <property name="assignedCustomerIds" type="string"/>
         <property name="customerIdsToBeAssigned" type="string"/>
         <property name="customerIdsToBeDeAssigned" type="string"/>
+        <property name="productListCompanyRelation" type="ProductListCompanyRelation"/>
+        <property name="assignedCompanyIds" type="string"/>
+        <property name="companyIdsToBeAssigned" type="string"/>
+        <property name="companyIdsToBeDeAssigned" type="string"/>
     </transfer>
 
 </transfers>

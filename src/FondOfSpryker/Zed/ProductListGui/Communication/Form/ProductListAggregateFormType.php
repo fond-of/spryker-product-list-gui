@@ -20,6 +20,10 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
     public const FIELD_CUSTOMER_IDS_TO_BE_ASSIGNED = ProductListAggregateFormTransfer::CUSTOMER_IDS_TO_BE_ASSIGNED;
     public const FIELD_CUSTOMER_IDS_TO_BE_DEASSIGNED = ProductListAggregateFormTransfer::CUSTOMER_IDS_TO_BE_DE_ASSIGNED;
 
+    public const FIELD_ASSIGNED_COMPANY_IDS = ProductListAggregateFormTransfer::ASSIGNED_COMPANY_IDS;
+    public const FIELD_COMPANY_IDS_TO_BE_ASSIGNED = ProductListAggregateFormTransfer::COMPANY_IDS_TO_BE_ASSIGNED;
+    public const FIELD_COMPANY_IDS_TO_BE_DEASSIGNED = ProductListAggregateFormTransfer::COMPANY_IDS_TO_BE_DE_ASSIGNED;
+
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
@@ -47,7 +51,11 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
         $this->addAssignedCustomerIdsField($builder)
             ->addCustomerIdsToBeAssignedField($builder)
             ->addCustomerIdsToBeDeassignedField($builder)
-            ->addProductListCustomerRelationSubForm($builder);
+            ->addProductListCustomerRelationSubForm($builder)
+            ->addAssignedCompanyIdsField($builder)
+            ->addCompanyIdsToBeAssignedField($builder)
+            ->addCompanyIdsToBeDeassignedField($builder)
+            ->addProductListCompanyRelationSubForm($builder);
 
         parent::buildForm($builder, $options);
     }
@@ -62,6 +70,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
         parent::onPreSubmit($formEvent);
 
         $data = $formEvent->getData();
+
         $assignedCustomerIds = $data[static::FIELD_ASSIGNED_CUSTOMER_IDS]
             ? preg_split('/,/', $data[static::FIELD_ASSIGNED_CUSTOMER_IDS], null, PREG_SPLIT_NO_EMPTY)
             : [];
@@ -75,6 +84,20 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
         $assignedCustomerIds = array_unique(array_merge($assignedCustomerIds, $customerIdsToBeAssigned));
         $assignedCustomerIds = array_diff($assignedCustomerIds, $customerIdsToBeDeassigned);
         $data[ProductListAggregateFormTransfer::PRODUCT_LIST_CUSTOMER_RELATION][ProductListCustomerRelationFormType::CUSTOMER_IDS] = $assignedCustomerIds;
+
+        $assignedCompanyIds = $data[static::FIELD_ASSIGNED_COMPANY_IDS]
+            ? preg_split('/,/', $data[static::FIELD_ASSIGNED_COMPANY_IDS], null, PREG_SPLIT_NO_EMPTY)
+            : [];
+        $companyIdsToBeAssigned = $data[static::FIELD_COMPANY_IDS_TO_BE_ASSIGNED]
+            ? preg_split('/,/', $data[static::FIELD_COMPANY_IDS_TO_BE_ASSIGNED], null, PREG_SPLIT_NO_EMPTY)
+            : [];
+        $companyIdsToBeDeassigned = $data[static::FIELD_COMPANY_IDS_TO_BE_DEASSIGNED]
+            ? preg_split('/,/', $data[static::FIELD_COMPANY_IDS_TO_BE_DEASSIGNED], null, PREG_SPLIT_NO_EMPTY)
+            : [];
+
+        $assignedCompanyIds = array_unique(array_merge($assignedCompanyIds, $companyIdsToBeAssigned));
+        $assignedCompanyIds = array_diff($assignedCompanyIds, $companyIdsToBeDeassigned);
+        $data[ProductListAggregateFormTransfer::PRODUCT_LIST_COMPANY_RELATION][ProductListCompanyRelationFormType::COMPANY_IDS] = $assignedCompanyIds;
 
         $formEvent->setData($data);
     }
@@ -166,6 +189,66 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
         $builder->add(
             ProductListAggregateFormTransfer::PRODUCT_LIST_CUSTOMER_RELATION,
             ProductListCustomerRelationFormType::class
+        );
+
+        return $this;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addAssignedCompanyIdsField(FormBuilderInterface $builder): self
+    {
+        $builder->add(
+            static::FIELD_ASSIGNED_COMPANY_IDS,
+            HiddenType::class
+        );
+
+        return $this;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addCompanyIdsToBeAssignedField(FormBuilderInterface $builder): self
+    {
+        $builder->add(
+            static::FIELD_COMPANY_IDS_TO_BE_ASSIGNED,
+            HiddenType::class
+        );
+
+        return $this;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addCompanyIdsToBeDeassignedField(FormBuilderInterface $builder): self
+    {
+        $builder->add(
+            static::FIELD_COMPANY_IDS_TO_BE_DEASSIGNED,
+            HiddenType::class
+        );
+
+        return $this;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addProductListCompanyRelationSubForm(FormBuilderInterface $builder): self
+    {
+        $builder->add(
+            ProductListAggregateFormTransfer::PRODUCT_LIST_COMPANY_RELATION,
+            ProductListCompanyRelationFormType::class
         );
 
         return $this;

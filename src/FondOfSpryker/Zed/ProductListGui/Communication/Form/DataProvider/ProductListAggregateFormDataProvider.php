@@ -29,6 +29,17 @@ class ProductListAggregateFormDataProvider extends BaseProductListAggregateFormD
 
         $aggregateFormTransfer = $this->setAssignedCustomers($aggregateFormTransfer, $assignedCustomerIds);
 
+        $assignedCompanyIds = [];
+        $productListCompanyRelationTransfer = $productListTransfer->getProductListCompanyRelation();
+
+        if ($productListCompanyRelationTransfer && $productListCompanyRelationTransfer->getCompanyIds()) {
+            foreach ($productListCompanyRelationTransfer->getCompanyIds() as $companyId) {
+                $assignedCompanyIds[] = $companyId;
+            }
+        }
+
+        $aggregateFormTransfer = $this->setAssignedCompanies($aggregateFormTransfer, $assignedCompanyIds);
+
         return $aggregateFormTransfer;
     }
 
@@ -43,6 +54,21 @@ class ProductListAggregateFormDataProvider extends BaseProductListAggregateFormD
         array $assignedCustomerIds
     ): ProductListAggregateFormTransfer {
         $aggregateFormTransfer->setAssignedCustomerIds(implode(',', $assignedCustomerIds));
+
+        return $aggregateFormTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\ProductListAggregateFormTransfer $aggregateFormTransfer
+     * @param int[] $assignedCompanyIds
+     *
+     * @return \Generated\Shared\Transfer\ProductListAggregateFormTransfer
+     */
+    protected function setAssignedCompanies(
+        ProductListAggregateFormTransfer $aggregateFormTransfer,
+        array $assignedCompanyIds
+    ): ProductListAggregateFormTransfer {
+        $aggregateFormTransfer->setAssignedCompanyIds(implode(',', $assignedCompanyIds));
 
         return $aggregateFormTransfer;
     }

@@ -26,6 +26,7 @@ class AvailableCustomerTable extends AbstractCustomerTable
                 ->endUse()
                 ->distinct();
         }
+
         return $spyCustomerQuery;
     }
 }

@@ -4,13 +4,18 @@ namespace FondOfSpryker\Zed\ProductListGui\Communication;
 
 use FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListAggregateFormDataProvider;
 use FondOfSpryker\Zed\ProductListGui\Communication\Form\ProductListAggregateFormType;
+use FondOfSpryker\Zed\ProductListGui\Communication\Table\AssignedCompanyTable;
 use FondOfSpryker\Zed\ProductListGui\Communication\Table\AssignedCustomerTable;
+use FondOfSpryker\Zed\ProductListGui\Communication\Table\AvailableCompanyTable;
 use FondOfSpryker\Zed\ProductListGui\Communication\Table\AvailableCustomerTable;
+use FondOfSpryker\Zed\ProductListGui\Communication\Tabs\AssignedCompanyRelationTabs;
 use FondOfSpryker\Zed\ProductListGui\Communication\Tabs\AssignedCustomerRelationTabs;
+use FondOfSpryker\Zed\ProductListGui\Communication\Tabs\AvailableCompanyRelationTabs;
 use FondOfSpryker\Zed\ProductListGui\Communication\Tabs\AvailableCustomerRelationTabs;
 use FondOfSpryker\Zed\ProductListGui\Communication\Tabs\ProductListAggregationTabs;
 use FondOfSpryker\Zed\ProductListGui\ProductListGuiDependencyProvider;
 use Generated\Shared\Transfer\ProductListAggregateFormTransfer;
+use Orm\Zed\Company\Persistence\SpyCompanyQuery;
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
 use Spryker\Zed\Gui\Communication\Tabs\TabsInterface;
 use Spryker\Zed\ProductListGui\Communication\ProductListGuiCommunicationFactory as BaseProductListGuiCommunicationFactory;
@@ -46,11 +51,27 @@ class ProductListGuiCommunicationFactory extends BaseProductListGuiCommunication
     }
 
     /**
+     * @return \FondOfSpryker\Zed\ProductListGui\Communication\Table\AvailableCompanyTable
+     */
+    public function createAvailableCompanyTable(): AvailableCompanyTable
+    {
+        return new AvailableCompanyTable($this->getCompanyPropelQuery());
+    }
+
+    /**
      * @return \FondOfSpryker\Zed\ProductListGui\Communication\Table\AssignedCustomerTable
      */
     public function createAssignedCustomerTable(): AssignedCustomerTable
     {
         return new AssignedCustomerTable($this->getCustomerPropelQuery());
+    }
+
+    /**
+     * @return \FondOfSpryker\Zed\ProductListGui\Communication\Table\AssignedCompanyTable
+     */
+    public function createAssignedCompanyTable(): AssignedCompanyTable
+    {
+        return new AssignedCompanyTable($this->getCompanyPropelQuery());
     }
 
     /**
@@ -64,9 +85,25 @@ class ProductListGuiCommunicationFactory extends BaseProductListGuiCommunication
     /**
      * @return \Spryker\Zed\Gui\Communication\Tabs\TabsInterface
      */
+    public function createAvailableCompanyRelationTabs(): TabsInterface
+    {
+        return new AvailableCompanyRelationTabs();
+    }
+
+    /**
+     * @return \Spryker\Zed\Gui\Communication\Tabs\TabsInterface
+     */
     public function createAssignedCustomerRelationTabs(): TabsInterface
     {
         return new AssignedCustomerRelationTabs();
+    }
+
+    /**
+     * @return \Spryker\Zed\Gui\Communication\Tabs\TabsInterface
+     */
+    public function createAssignedCompanyRelationTabs(): TabsInterface
+    {
+        return new AssignedCompanyRelationTabs();
     }
 
     /**
@@ -83,6 +120,14 @@ class ProductListGuiCommunicationFactory extends BaseProductListGuiCommunication
     public function getCustomerPropelQuery(): SpyCustomerQuery
     {
         return $this->getProvidedDependency(ProductListGuiDependencyProvider::PROPEL_QUERY_CUSTOMER);
+    }
+
+    /**
+     * @return \Orm\Zed\Company\Persistence\SpyCompanyQuery
+     */
+    public function getCompanyPropelQuery(): SpyCompanyQuery
+    {
+        return $this->getProvidedDependency(ProductListGuiDependencyProvider::PROPEL_QUERY_COMPANY);
     }
 
     /**

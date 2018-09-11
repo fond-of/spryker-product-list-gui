@@ -1,0 +1,16 @@
+{% block content %}
+    {# form_row(productListCompanyRelationForm.products_upload) #}
+    {{ tabs(
+        availableCompanyRelationTabs,
+        {
+            'availableCompanyTable': availableCompanyTable
+        }
+    ) }}
+    <hr/>
+    {{ tabs(
+        assignedCompanyRelationTabs,
+        {
+            'assignedCompanyTable': assignedCompanyTable
+        }
+    ) }}
+{% endblock %}
