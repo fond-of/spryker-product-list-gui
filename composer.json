@@ -15,7 +15,8 @@
   "require": {
     "php": ">=7.1",
     "spryker/product-list-gui": "^1.0.0",
-    "fond-of-spryker/product-list-customer": "dev-master"
+    "fond-of-spryker/product-list-company": "^1.0.0",
+    "fond-of-spryker/product-list-customer": "^1.0.0"
   },
   "require-dev": {
     "spryker/code-sniffer": "^0.12",
