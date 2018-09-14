@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProductListCustomerRelationFormType extends AbstractType
 {
     public const FIELD_ID_PRODUCT_LIST = ProductListCustomerRelationTransfer::ID_PRODUCT_LIST;
-    public const CUSTOMER_IDS = ProductListCustomerRelationTransfer::CUSTOMER_IDS;
+    public const FIELD_CUSTOMER_IDS = ProductListCustomerRelationTransfer::CUSTOMER_IDS;
     public const FIELD_FILE_UPLOAD = 'customers_upload';
     public const BLOCK_PREFIX = 'productListCustomerRelationTransfer';
 
@@ -80,7 +80,7 @@ class ProductListCustomerRelationFormType extends AbstractType
      */
     protected function addCustomerIdsField(FormBuilderInterface $builder): self
     {
-        $builder->add(static::CUSTOMER_IDS, HiddenType::class);
+        $builder->add(static::FIELD_CUSTOMER_IDS, HiddenType::class);
 
         return $this;
     }

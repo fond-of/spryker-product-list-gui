@@ -83,7 +83,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
 
         $assignedCustomerIds = array_unique(array_merge($assignedCustomerIds, $customerIdsToBeAssigned));
         $assignedCustomerIds = array_diff($assignedCustomerIds, $customerIdsToBeDeassigned);
-        $data[ProductListAggregateFormTransfer::PRODUCT_LIST_CUSTOMER_RELATION][ProductListCustomerRelationFormType::CUSTOMER_IDS] = $assignedCustomerIds;
+        $data[ProductListAggregateFormTransfer::PRODUCT_LIST_CUSTOMER_RELATION][ProductListCustomerRelationFormType::FIELD_CUSTOMER_IDS] = $assignedCustomerIds;
 
         $assignedCompanyIds = $data[static::FIELD_ASSIGNED_COMPANY_IDS]
             ? preg_split('/,/', $data[static::FIELD_ASSIGNED_COMPANY_IDS], null, PREG_SPLIT_NO_EMPTY)

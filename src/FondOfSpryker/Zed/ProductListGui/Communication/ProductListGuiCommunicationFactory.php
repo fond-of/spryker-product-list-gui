@@ -3,6 +3,8 @@
 namespace FondOfSpryker\Zed\ProductListGui\Communication;
 
 use FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListAggregateFormDataProvider;
+use FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCompanyRelationFormDataProvider;
+use FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCustomerRelationFormDataProvider;
 use FondOfSpryker\Zed\ProductListGui\Communication\Form\ProductListAggregateFormType;
 use FondOfSpryker\Zed\ProductListGui\Communication\Table\AssignedCompanyTable;
 use FondOfSpryker\Zed\ProductListGui\Communication\Table\AssignedCustomerTable;
@@ -131,6 +133,26 @@ class ProductListGuiCommunicationFactory extends BaseProductListGuiCommunication
     }
 
     /**
+     * @return \FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCustomerRelationFormDataProvider
+     */
+    public function createProductListCustomerRelationFormDataProvider(): ProductListCustomerRelationFormDataProvider
+    {
+        return new ProductListCustomerRelationFormDataProvider(
+            $this->getProductListFacade()
+        );
+    }
+
+    /**
+     * @return \FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCompanyRelationFormDataProvider
+     */
+    public function createProductListCompanyRelationFormDataProvider(): ProductListCompanyRelationFormDataProvider
+    {
+        return new ProductListCompanyRelationFormDataProvider(
+            $this->getProductListFacade()
+        );
+    }
+
+    /**
      * @return \Spryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListAggregateFormDataProvider
      */
     public function createProductListAggregateFormDataProvider()
@@ -138,6 +160,8 @@ class ProductListGuiCommunicationFactory extends BaseProductListGuiCommunication
         return new ProductListAggregateFormDataProvider(
             $this->createProductListFormDataProvider(),
             $this->createProductListCategoryRelationFormDataProvider(),
+            $this->createProductListCustomerRelationFormDataProvider(),
+            $this->createProductListCompanyRelationFormDataProvider(),
             $this->getProductListOwnerTypeFormExpanderPlugins()
         );
     }

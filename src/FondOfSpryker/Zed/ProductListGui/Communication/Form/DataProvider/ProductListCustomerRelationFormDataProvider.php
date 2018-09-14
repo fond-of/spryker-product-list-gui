@@ -39,7 +39,6 @@ class ProductListCustomerRelationFormDataProvider
         $productListCustomerRelationTransfer = $this->productListFacade
             ->getProductListById($productListTransfer)
             ->getProductListCustomerRelation();
-
         $productListCustomerRelationTransfer->setIdProductList($productListTransfer->getIdProductList());
 
         return $productListCustomerRelationTransfer;

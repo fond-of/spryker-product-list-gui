@@ -4,9 +4,41 @@ namespace FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider;
 
 use Generated\Shared\Transfer\ProductListAggregateFormTransfer;
 use Spryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListAggregateFormDataProvider as BaseProductListAggregateFormDataProvider;
+use Spryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCategoryRelationFormDataProvider;
+use Spryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListFormDataProvider;
 
 class ProductListAggregateFormDataProvider extends BaseProductListAggregateFormDataProvider
 {
+    protected $productListCustomerRelationFormDataProvider;
+
+    protected $productListCompanyRelationFormDataProvider;
+
+    /**
+     * ProductListAggregateFormDataProvider constructor.
+     *
+     * @param \Spryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListFormDataProvider $productListFormDataProvider
+     * @param \Spryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCategoryRelationFormDataProvider $productListCategoryRelationFormDataProvider
+     * @param \FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCustomerRelationFormDataProvider $productListCustomerRelationFormDataProvider
+     * @param \FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCompanyRelationFormDataProvider $productListCompanyRelationFormDataProvider
+     * @param \Spryker\Zed\ProductListGuiExtension\Dependency\Plugin\ProductListOwnerTypeFormExpanderPluginInterface[] $productListOwnerTypeFormExpanderPlugins
+     */
+    public function __construct(
+        ProductListFormDataProvider $productListFormDataProvider,
+        ProductListCategoryRelationFormDataProvider $productListCategoryRelationFormDataProvider,
+        ProductListCustomerRelationFormDataProvider $productListCustomerRelationFormDataProvider,
+        ProductListCompanyRelationFormDataProvider $productListCompanyRelationFormDataProvider,
+        array $productListOwnerTypeFormExpanderPlugins = []
+    ) {
+        parent::__construct(
+            $productListFormDataProvider,
+            $productListCategoryRelationFormDataProvider,
+            $productListOwnerTypeFormExpanderPlugins
+        );
+
+        $this->productListCustomerRelationFormDataProvider = $productListCustomerRelationFormDataProvider;
+        $this->productListCompanyRelationFormDataProvider = $productListCompanyRelationFormDataProvider;
+    }
+
     /**
      * @param int|null $idProductList
      *
@@ -17,9 +49,7 @@ class ProductListAggregateFormDataProvider extends BaseProductListAggregateFormD
         $aggregateFormTransfer = parent::getData($idProductList);
 
         $assignedCustomerIds = [];
-        $productListTransfer = $aggregateFormTransfer->getProductList();
-
-        $productListCustomerRelationTransfer = $productListTransfer->getProductListCustomerRelation();
+        $productListCustomerRelationTransfer = $this->productListCustomerRelationFormDataProvider->getData($idProductList);
 
         if ($productListCustomerRelationTransfer && $productListCustomerRelationTransfer->getCustomerIds()) {
             foreach ($productListCustomerRelationTransfer->getCustomerIds() as $customerId) {
@@ -30,7 +60,7 @@ class ProductListAggregateFormDataProvider extends BaseProductListAggregateFormD
         $aggregateFormTransfer = $this->setAssignedCustomers($aggregateFormTransfer, $assignedCustomerIds);
 
         $assignedCompanyIds = [];
-        $productListCompanyRelationTransfer = $productListTransfer->getProductListCompanyRelation();
+        $productListCompanyRelationTransfer = $this->productListCompanyRelationFormDataProvider->getData($idProductList);
 
         if ($productListCompanyRelationTransfer && $productListCompanyRelationTransfer->getCompanyIds()) {
             foreach ($productListCompanyRelationTransfer->getCompanyIds() as $companyId) {
