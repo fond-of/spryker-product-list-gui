@@ -2,7 +2,6 @@
 
 namespace FondOfSpryker\Zed\ProductListGui\Communication\Controller;
 
-use Generated\Shared\Transfer\ProductListAggregateFormTransfer;
 use Generated\Shared\Transfer\ProductListTransfer;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -103,24 +102,18 @@ trait ProductListGuiControllerTrait
      *
      * @return \Generated\Shared\Transfer\ProductListTransfer|null
      */
-    protected function handleProductListAggregateForm(
+    protected function findProductListTransfer(
         Request $request,
         FormInterface $aggregateForm
     ): ?ProductListTransfer {
-        $aggregateForm->handleRequest($request);
+        $productListTransfer = parent::findProductListTransfer($request, $aggregateForm);
 
-        if (!$aggregateForm->isSubmitted() || !$aggregateForm->isValid()) {
-            return null;
+        if ($productListTransfer === null) {
+            return $productListTransfer;
         }
 
         /** @var \Generated\Shared\Transfer\ProductListAggregateFormTransfer $aggregateFormTransfer */
         $aggregateFormTransfer = $aggregateForm->getData();
-
-        $productListTransfer = $aggregateFormTransfer->getProductList();
-        $productListTransfer->setProductListCategoryRelation($aggregateFormTransfer->getProductListCategoryRelation());
-        $productListTransfer->setProductListProductConcreteRelation(
-            $aggregateFormTransfer->getProductListProductConcreteRelation()
-        );
 
         $productListTransfer->setProductListCustomerRelation(
             $aggregateFormTransfer->getProductListCustomerRelation()
@@ -130,13 +123,6 @@ trait ProductListGuiControllerTrait
             $aggregateFormTransfer->getProductListCompanyRelation()
         );
 
-        $productListTransfer->setProductListProductConcreteRelation(
-            $this->getProductListProductConcreteRelationFromCsv(
-                $productListTransfer->getProductListProductConcreteRelation(),
-                $aggregateForm->get(ProductListAggregateFormTransfer::PRODUCT_LIST_PRODUCT_CONCRETE_RELATION)
-            )
-        );
-
-        return $this->storeProductList($productListTransfer);
+        return $productListTransfer;
     }
 }
