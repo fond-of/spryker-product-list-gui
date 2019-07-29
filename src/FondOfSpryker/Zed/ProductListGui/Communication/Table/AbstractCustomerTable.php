@@ -154,7 +154,7 @@ abstract class AbstractCustomerTable extends AbstractTable
     }
 
     /**
-     * @param \Orm\Zed\Company\Persistence\SpyCustomerQuery $spyCustomerQuery
+     * @param \Orm\Zed\Customer\Persistence\SpyCustomerQuery $spyCustomerQuery
      *
      * @return \Orm\Zed\Customer\Persistence\SpyCustomerQuery
      */
