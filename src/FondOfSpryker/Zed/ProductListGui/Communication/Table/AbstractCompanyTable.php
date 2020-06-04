@@ -26,9 +26,8 @@ abstract class AbstractCompanyTable extends AbstractTable
     /**
      * @param \Orm\Zed\Company\Persistence\SpyCompanyQuery $spyCompanyQuery
      */
-    public function __construct(
-        SpyCompanyQuery $spyCompanyQuery
-    ) {
+    public function __construct(SpyCompanyQuery $spyCompanyQuery)
+    {
         $this->spyCompanyQuery = $spyCompanyQuery;
         $this->defaultUrl = static::DEFAULT_URL;
         $this->setTableIdentifier(static::TABLE_IDENTIFIER);
