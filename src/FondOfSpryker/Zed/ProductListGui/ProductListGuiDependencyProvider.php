@@ -9,8 +9,8 @@ use Spryker\Zed\ProductListGui\ProductListGuiDependencyProvider as BaseProductLi
 
 class ProductListGuiDependencyProvider extends BaseProductListGuiDependencyProvider
 {
-    const PROPEL_QUERY_CUSTOMER = 'PROPEL_QUERY_CUSTOMER';
-    const PROPEL_QUERY_COMPANY = 'PROPEL_QUERY_COMPANY';
+    public const PROPEL_QUERY_CUSTOMER = 'PROPEL_QUERY_CUSTOMER';
+    public const PROPEL_QUERY_COMPANY = 'PROPEL_QUERY_COMPANY';
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -34,7 +34,7 @@ class ProductListGuiDependencyProvider extends BaseProductListGuiDependencyProvi
      */
     protected function addCustomerPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_CUSTOMER] = function () {
+        $container[static::PROPEL_QUERY_CUSTOMER] = static function () {
             return SpyCustomerQuery::create();
         };
 
@@ -48,7 +48,7 @@ class ProductListGuiDependencyProvider extends BaseProductListGuiDependencyProvi
      */
     protected function addCompanyPropelQuery(Container $container): Container
     {
-        $container[static::PROPEL_QUERY_COMPANY] = function () {
+        $container[static::PROPEL_QUERY_COMPANY] = static function () {
             return SpyCompanyQuery::create();
         };
 

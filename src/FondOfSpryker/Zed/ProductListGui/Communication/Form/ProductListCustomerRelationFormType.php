@@ -1,20 +1,17 @@
 <?php
 
-/**
- * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
- * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
- */
-
 namespace FondOfSpryker\Zed\ProductListGui\Communication\Form;
 
 use Generated\Shared\Transfer\ProductListCustomerRelationTransfer;
-
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @method \FondOfSpryker\Zed\ProductListGui\Communication\ProductListGuiCommunicationFactory getFactory()
+ */
 class ProductListCustomerRelationFormType extends AbstractType
 {
     public const FIELD_ID_PRODUCT_LIST = ProductListCustomerRelationTransfer::ID_PRODUCT_LIST;
@@ -27,7 +24,7 @@ class ProductListCustomerRelationFormType extends AbstractType
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
 
@@ -63,7 +60,7 @@ class ProductListCustomerRelationFormType extends AbstractType
      *
      * @return $this
      */
-    protected function addIdProductListField(FormBuilderInterface $builder): self
+    protected function addIdProductListField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_ID_PRODUCT_LIST,
@@ -78,7 +75,7 @@ class ProductListCustomerRelationFormType extends AbstractType
      *
      * @return $this
      */
-    protected function addCustomerIdsField(FormBuilderInterface $builder): self
+    protected function addCustomerIdsField(FormBuilderInterface $builder)
     {
         $builder->add(static::FIELD_CUSTOMER_IDS, HiddenType::class);
 
@@ -90,7 +87,7 @@ class ProductListCustomerRelationFormType extends AbstractType
      *
      * @return $this
      */
-    protected function addUploadFileField(FormBuilderInterface $builder): self
+    protected function addUploadFileField(FormBuilderInterface $builder)
     {
         $builder->add(static::FIELD_FILE_UPLOAD, FileType::class, [
             'label' => 'Import Product List',

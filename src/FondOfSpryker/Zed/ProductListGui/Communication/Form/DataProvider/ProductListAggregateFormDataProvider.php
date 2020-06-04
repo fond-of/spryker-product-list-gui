@@ -9,13 +9,17 @@ use Spryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListFormDa
 
 class ProductListAggregateFormDataProvider extends BaseProductListAggregateFormDataProvider
 {
+    /**
+     * @var \FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCustomerRelationFormDataProvider
+     */
     protected $productListCustomerRelationFormDataProvider;
 
+    /**
+     * @var \FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCompanyRelationFormDataProvider
+     */
     protected $productListCompanyRelationFormDataProvider;
 
     /**
-     * ProductListAggregateFormDataProvider constructor.
-     *
      * @param \Spryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListFormDataProvider $productListFormDataProvider
      * @param \Spryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCategoryRelationFormDataProvider $productListCategoryRelationFormDataProvider
      * @param \FondOfSpryker\Zed\ProductListGui\Communication\Form\DataProvider\ProductListCustomerRelationFormDataProvider $productListCustomerRelationFormDataProvider
@@ -51,7 +55,7 @@ class ProductListAggregateFormDataProvider extends BaseProductListAggregateFormD
         $assignedCustomerIds = [];
         $productListCustomerRelationTransfer = $this->productListCustomerRelationFormDataProvider->getData($idProductList);
 
-        if ($productListCustomerRelationTransfer && $productListCustomerRelationTransfer->getCustomerIds()) {
+        if ($productListCustomerRelationTransfer->getCustomerIds()) {
             foreach ($productListCustomerRelationTransfer->getCustomerIds() as $customerId) {
                 $assignedCustomerIds[] = $customerId;
             }
@@ -62,7 +66,7 @@ class ProductListAggregateFormDataProvider extends BaseProductListAggregateFormD
         $assignedCompanyIds = [];
         $productListCompanyRelationTransfer = $this->productListCompanyRelationFormDataProvider->getData($idProductList);
 
-        if ($productListCompanyRelationTransfer && $productListCompanyRelationTransfer->getCompanyIds()) {
+        if ($productListCompanyRelationTransfer->getCompanyIds()) {
             foreach ($productListCompanyRelationTransfer->getCompanyIds() as $companyId) {
                 $assignedCompanyIds[] = $companyId;
             }
