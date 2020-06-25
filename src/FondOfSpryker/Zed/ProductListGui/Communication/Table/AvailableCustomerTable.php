@@ -20,8 +20,6 @@ class AvailableCustomerTable extends AbstractCustomerTable
         if ($this->getIdProductList()) {
             $spyCustomerQuery
                 ->useSpyProductListCustomerQuery(null, Criteria::LEFT_JOIN)
-                    ->filterByFkProductList($this->getIdProductList(), Criteria::NOT_IN)
-                    ->_or()
                     ->filterByFkProductList(null, Criteria::ISNULL)
                 ->endUse()
                 ->distinct();
