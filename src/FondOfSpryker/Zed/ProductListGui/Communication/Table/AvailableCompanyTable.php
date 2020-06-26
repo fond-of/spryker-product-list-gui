@@ -20,8 +20,6 @@ class AvailableCompanyTable extends AbstractCompanyTable
         if ($this->getIdProductList()) {
             $spyCompanyQuery
                 ->useSpyProductListCompanyQuery(null, Criteria::LEFT_JOIN)
-                    ->filterByFkProductList($this->getIdProductList(), Criteria::NOT_IN)
-                    ->_or()
                     ->filterByFkProductList(null, Criteria::ISNULL)
                 ->endUse()
                 ->distinct();
