@@ -3,6 +3,7 @@
 namespace FondOfSpryker\Zed\ProductListGui\Communication\Table;
 
 use Orm\Zed\Customer\Persistence\SpyCustomerQuery;
+use Orm\Zed\ProductList\Persistence\Map\SpyProductListCompanyTableMap;
 use Spryker\Zed\PropelOrm\Business\Runtime\ActiveQuery\Criteria;
 
 class AvailableCustomerTable extends AbstractCustomerTable
@@ -18,13 +19,20 @@ class AvailableCustomerTable extends AbstractCustomerTable
     protected function filterQuery(SpyCustomerQuery $spyCustomerQuery): SpyCustomerQuery
     {
         if ($this->getIdProductList()) {
-            $spyCustomerQuery
-                ->useSpyProductListCustomerQuery(null, Criteria::LEFT_JOIN)
-                    ->filterByFkProductList($this->getIdProductList(), Criteria::NOT_IN)
-                    ->_or()
+            if ($this->getIdProductList()) {
+                $spyCustomerQuery
+                    ->useSpyProductListCustomerQuery(SpyProductListCompanyTableMap::TABLE_NAME, Criteria::LEFT_JOIN)
                     ->filterByFkProductList(null, Criteria::ISNULL)
-                ->endUse()
-                ->distinct();
+                    ->endUse()
+                    ->addJoinCondition(
+                        SpyProductListCompanyTableMap::TABLE_NAME,
+                        sprintf(
+                            '%s = %d',
+                            SpyProductListCompanyTableMap::COL_FK_PRODUCT_LIST,
+                            $this->getIdProductList()
+                        )
+                    );
+            }
         }
 
         return $spyCustomerQuery;
