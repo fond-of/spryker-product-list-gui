@@ -16,13 +16,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class ProductListAggregateFormType extends BaseProductListAggregateFormType
 {
-    public const FIELD_ASSIGNED_CUSTOMER_IDS = ProductListAggregateFormTransfer::ASSIGNED_CUSTOMER_IDS;
-    public const FIELD_CUSTOMER_IDS_TO_BE_ASSIGNED = ProductListAggregateFormTransfer::CUSTOMER_IDS_TO_BE_ASSIGNED;
-    public const FIELD_CUSTOMER_IDS_TO_BE_DEASSIGNED = ProductListAggregateFormTransfer::CUSTOMER_IDS_TO_BE_DE_ASSIGNED;
+    protected const FIELD_ASSIGNED_CUSTOMER_IDS = ProductListAggregateFormTransfer::ASSIGNED_CUSTOMER_IDS;
+    protected const FIELD_CUSTOMER_IDS_TO_BE_ASSIGNED = ProductListAggregateFormTransfer::CUSTOMER_IDS_TO_BE_ASSIGNED;
+    protected const FIELD_CUSTOMER_IDS_TO_BE_DEASSIGNED = ProductListAggregateFormTransfer::CUSTOMER_IDS_TO_BE_DE_ASSIGNED;
 
-    public const FIELD_ASSIGNED_COMPANY_IDS = ProductListAggregateFormTransfer::ASSIGNED_COMPANY_IDS;
-    public const FIELD_COMPANY_IDS_TO_BE_ASSIGNED = ProductListAggregateFormTransfer::COMPANY_IDS_TO_BE_ASSIGNED;
-    public const FIELD_COMPANY_IDS_TO_BE_DEASSIGNED = ProductListAggregateFormTransfer::COMPANY_IDS_TO_BE_DE_ASSIGNED;
+    protected const FIELD_ASSIGNED_COMPANY_IDS = ProductListAggregateFormTransfer::ASSIGNED_COMPANY_IDS;
+    protected const FIELD_COMPANY_IDS_TO_BE_ASSIGNED = ProductListAggregateFormTransfer::COMPANY_IDS_TO_BE_ASSIGNED;
+    protected const FIELD_COMPANY_IDS_TO_BE_DEASSIGNED = ProductListAggregateFormTransfer::COMPANY_IDS_TO_BE_DE_ASSIGNED;
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
@@ -106,7 +106,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      *
-     * @return $this
+     * @return \Spryker\Zed\ProductListGui\Communication\Form\ProductListAggregateFormType
      */
     protected function addOwnerTypeField($builder, $options): parent
     {
@@ -139,7 +139,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
      *
      * @return $this
      */
-    protected function addAssignedCustomerIdsField(FormBuilderInterface $builder): self
+    protected function addAssignedCustomerIdsField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_ASSIGNED_CUSTOMER_IDS,
@@ -154,7 +154,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
      *
      * @return $this
      */
-    protected function addCustomerIdsToBeAssignedField(FormBuilderInterface $builder): self
+    protected function addCustomerIdsToBeAssignedField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_CUSTOMER_IDS_TO_BE_ASSIGNED,
@@ -169,7 +169,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
      *
      * @return $this
      */
-    protected function addCustomerIdsToBeDeassignedField(FormBuilderInterface $builder): self
+    protected function addCustomerIdsToBeDeassignedField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_CUSTOMER_IDS_TO_BE_DEASSIGNED,
@@ -184,7 +184,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
      *
      * @return $this
      */
-    protected function addProductListCustomerRelationSubForm(FormBuilderInterface $builder): self
+    protected function addProductListCustomerRelationSubForm(FormBuilderInterface $builder)
     {
         $builder->add(
             ProductListAggregateFormTransfer::PRODUCT_LIST_CUSTOMER_RELATION,
@@ -199,7 +199,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
      *
      * @return $this
      */
-    protected function addAssignedCompanyIdsField(FormBuilderInterface $builder): self
+    protected function addAssignedCompanyIdsField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_ASSIGNED_COMPANY_IDS,
@@ -214,7 +214,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
      *
      * @return $this
      */
-    protected function addCompanyIdsToBeAssignedField(FormBuilderInterface $builder): self
+    protected function addCompanyIdsToBeAssignedField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_COMPANY_IDS_TO_BE_ASSIGNED,
@@ -229,7 +229,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
      *
      * @return $this
      */
-    protected function addCompanyIdsToBeDeassignedField(FormBuilderInterface $builder): self
+    protected function addCompanyIdsToBeDeassignedField(FormBuilderInterface $builder)
     {
         $builder->add(
             static::FIELD_COMPANY_IDS_TO_BE_DEASSIGNED,
@@ -244,7 +244,7 @@ class ProductListAggregateFormType extends BaseProductListAggregateFormType
      *
      * @return $this
      */
-    protected function addProductListCompanyRelationSubForm(FormBuilderInterface $builder): self
+    protected function addProductListCompanyRelationSubForm(FormBuilderInterface $builder)
     {
         $builder->add(
             ProductListAggregateFormTransfer::PRODUCT_LIST_COMPANY_RELATION,

@@ -8,13 +8,13 @@ use Spryker\Zed\ProductListGui\Communication\Tabs\ProductListAggregationTabs as 
 
 class ProductListAggregationTabs extends BaseProductListAggregationTabs
 {
-    const CUSTOMERS_TAB_NAME = 'product_list_customer_relation';
-    const CUSTOMERS_TAB_TITLE = 'Assign Customers';
-    const CUSTOMERS_TAB_TEMPLATE = '@ProductListGui/_partials/_tabs/product-list-customer-relation.twig';
+    protected const CUSTOMERS_TAB_NAME = 'product_list_customer_relation';
+    protected const CUSTOMERS_TAB_TITLE = 'Assign Customers';
+    protected const CUSTOMERS_TAB_TEMPLATE = '@ProductListGui/_partials/_tabs/product-list-customer-relation.twig';
 
-    const COMPANIES_TAB_NAME = 'product_list_company_relation';
-    const COMPANIES_TAB_TITLE = 'Assign Companies';
-    const COMPANIES_TAB_TEMPLATE = '@ProductListGui/_partials/_tabs/product-list-company-relation.twig';
+    protected const COMPANIES_TAB_NAME = 'product_list_company_relation';
+    protected const COMPANIES_TAB_TITLE = 'Assign Companies';
+    protected const COMPANIES_TAB_TEMPLATE = '@ProductListGui/_partials/_tabs/product-list-company-relation.twig';
 
     /**
      * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
@@ -36,7 +36,7 @@ class ProductListAggregationTabs extends BaseProductListAggregationTabs
      *
      * @return $this
      */
-    protected function addProductListCustomerRelationTab(TabsViewTransfer $tabsViewTransfer): self
+    protected function addProductListCustomerRelationTab(TabsViewTransfer $tabsViewTransfer)
     {
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer
@@ -54,7 +54,7 @@ class ProductListAggregationTabs extends BaseProductListAggregationTabs
      *
      * @return $this
      */
-    protected function addProductListCompanyRelationTab(TabsViewTransfer $tabsViewTransfer): self
+    protected function addProductListCompanyRelationTab(TabsViewTransfer $tabsViewTransfer)
     {
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer

@@ -1,3 +1,5 @@
+namespace: fond-of-spryker/product-list-gui
+
 suites:
   unit:
     path: .

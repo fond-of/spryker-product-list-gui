@@ -8,13 +8,13 @@ use Spryker\Zed\Gui\Communication\Tabs\AbstractTabs;
 
 class AvailableCustomerRelationTabs extends AbstractTabs
 {
-    const AVAILABLE_TAB_NAME = 'available_customer';
-    const AVAILABLE_TAB_TITLE = 'Select Customers to assign';
-    const AVAILABLE_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/available-customer-table.twig';
+    protected const AVAILABLE_TAB_NAME = 'available_customer';
+    protected const AVAILABLE_TAB_TITLE = 'Select Customers to assign';
+    protected const AVAILABLE_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/available-customer-table.twig';
 
-    const ASSIGNED_TAB_NAME = 'assignment_customer';
-    const ASSIGNED_TAB_TITLE = 'Customers to be assigned';
-    const ASSIGNED_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/assignment-customer-table.twig';
+    protected const ASSIGNED_TAB_NAME = 'assignment_customer';
+    protected const ASSIGNED_TAB_TITLE = 'Customers to be assigned';
+    protected const ASSIGNED_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/assignment-customer-table.twig';
 
     /**
      * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
@@ -36,7 +36,7 @@ class AvailableCustomerRelationTabs extends AbstractTabs
      *
      * @return $this
      */
-    protected function addAvailableCustomerTab(TabsViewTransfer $tabsViewTransfer): self
+    protected function addAvailableCustomerTab(TabsViewTransfer $tabsViewTransfer)
     {
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer
@@ -54,7 +54,7 @@ class AvailableCustomerRelationTabs extends AbstractTabs
      *
      * @return $this
      */
-    protected function addAssignmentCustomerTab(TabsViewTransfer $tabsViewTransfer): self
+    protected function addAssignmentCustomerTab(TabsViewTransfer $tabsViewTransfer)
     {
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer

@@ -8,13 +8,13 @@ use Spryker\Zed\Gui\Communication\Tabs\AbstractTabs;
 
 class AssignedCompanyRelationTabs extends AbstractTabs
 {
-    const ASSIGNED_COMPANY_TAB_NAME = 'assigned_company';
-    const ASSIGNED_COMPANY_TAB_TITLE = 'Companies in this list';
-    const ASSIGNED_COMPANY_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/assigned-company-table.twig';
+    protected const ASSIGNED_COMPANY_TAB_NAME = 'assigned_company';
+    protected const ASSIGNED_COMPANY_TAB_TITLE = 'Companies in this list';
+    protected const ASSIGNED_COMPANY_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/assigned-company-table.twig';
 
-    const DEASSIGNED_COMPANY_TAB_NAME = 'deassignment_company';
-    const DEASSIGNED_COMPANY_TAB_TITLE = 'Companies to be deassigned';
-    const DEASSIGNED_COMPANY_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/deassignment-company-table.twig';
+    protected const DEASSIGNED_COMPANY_TAB_NAME = 'deassignment_company';
+    protected const DEASSIGNED_COMPANY_TAB_TITLE = 'Companies to be deassigned';
+    protected const DEASSIGNED_COMPANY_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/deassignment-company-table.twig';
 
     /**
      * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
@@ -36,7 +36,7 @@ class AssignedCompanyRelationTabs extends AbstractTabs
      *
      * @return $this
      */
-    protected function addAssignedCompanyTab(TabsViewTransfer $tabsViewTransfer): self
+    protected function addAssignedCompanyTab(TabsViewTransfer $tabsViewTransfer)
     {
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer
@@ -54,7 +54,7 @@ class AssignedCompanyRelationTabs extends AbstractTabs
      *
      * @return $this
      */
-    protected function addDeassignmentCompanyTab(TabsViewTransfer $tabsViewTransfer): self
+    protected function addDeassignmentCompanyTab(TabsViewTransfer $tabsViewTransfer)
     {
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer

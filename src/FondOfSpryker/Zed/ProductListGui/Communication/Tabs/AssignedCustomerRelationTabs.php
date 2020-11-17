@@ -8,20 +8,20 @@ use Spryker\Zed\Gui\Communication\Tabs\AbstractTabs;
 
 class AssignedCustomerRelationTabs extends AbstractTabs
 {
-    const ASSIGNED_CUSTOMER_TAB_NAME = 'assigned_customer';
-    const ASSIGNED_CUSTOMER_TAB_TITLE = 'Customers in this list';
-    const ASSIGNED_CUSTOMER_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/assigned-customer-table.twig';
+    protected const ASSIGNED_CUSTOMER_TAB_NAME = 'assigned_customer';
+    protected const ASSIGNED_CUSTOMER_TAB_TITLE = 'Customers in this list';
+    protected const ASSIGNED_CUSTOMER_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/assigned-customer-table.twig';
 
-    const DEASSIGNED_CUSTOMER_TAB_NAME = 'deassignment_customer';
-    const DEASSIGNED_CUSTOMER_TAB_TITLE = 'Customers to be deassigned';
-    const DEASSIGNED_CUSTOMER_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/deassignment-customer-table.twig';
+    protected const DEASSIGNED_CUSTOMER_TAB_NAME = 'deassignment_customer';
+    protected const DEASSIGNED_CUSTOMER_TAB_TITLE = 'Customers to be deassigned';
+    protected const DEASSIGNED_CUSTOMER_TAB_TEMPLATE = '@ProductListGui/_partials/_tables/deassignment-customer-table.twig';
 
     /**
      * @param \Generated\Shared\Transfer\TabsViewTransfer $tabsViewTransfer
      *
      * @return \Generated\Shared\Transfer\TabsViewTransfer
      */
-    protected function build(TabsViewTransfer $tabsViewTransfer)
+    protected function build(TabsViewTransfer $tabsViewTransfer): TabsViewTransfer
     {
         $this->addAssignedCustomerTab($tabsViewTransfer)
             ->addDeassignmentCustomerTab($tabsViewTransfer);
@@ -36,7 +36,7 @@ class AssignedCustomerRelationTabs extends AbstractTabs
      *
      * @return $this
      */
-    protected function addAssignedCustomerTab(TabsViewTransfer $tabsViewTransfer): self
+    protected function addAssignedCustomerTab(TabsViewTransfer $tabsViewTransfer)
     {
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer
@@ -54,7 +54,7 @@ class AssignedCustomerRelationTabs extends AbstractTabs
      *
      * @return $this
      */
-    protected function addDeassignmentCustomerTab(TabsViewTransfer $tabsViewTransfer): self
+    protected function addDeassignmentCustomerTab(TabsViewTransfer $tabsViewTransfer)
     {
         $tabItemTransfer = new TabItemTransfer();
         $tabItemTransfer
